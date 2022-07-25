@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yang719.SpringWeb.mapper.CityplanningMapper">
+  <resultMap id="BaseResultMap" type="cn.yang719.SpringWeb.entity.Cityplanning">
+    <!--@mbg.generated-->
+    <!--@Table cityplanning-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="planFileUrl" jdbcType="VARCHAR" property="planfileurl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `uid`, `name`, introduction, `location`, planFileUrl
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from cityplanning
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from cityplanning
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.yang719.SpringWeb.entity.Cityplanning" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into cityplanning (`uid`, `name`, introduction, 
+      `location`, planFileUrl)
+    values (#{uid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{planfileurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.yang719.SpringWeb.entity.Cityplanning" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into cityplanning
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="location != null">
+        `location`,
+      </if>
+      <if test="planfileurl != null">
+        planFileUrl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="planfileurl != null">
+        #{planfileurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yang719.SpringWeb.entity.Cityplanning">
+    <!--@mbg.generated-->
+    update cityplanning
+    <set>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        `location` = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="planfileurl != null">
+        planFileUrl = #{planfileurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yang719.SpringWeb.entity.Cityplanning">
+    <!--@mbg.generated-->
+    update cityplanning
+    set `uid` = #{uid,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      `location` = #{location,jdbcType=VARCHAR},
+      planFileUrl = #{planfileurl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

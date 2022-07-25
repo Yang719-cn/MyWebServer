@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yang719.SpringWeb.mapper.PicuserMapper">
+  <resultMap id="BaseResultMap" type="cn.yang719.SpringWeb.entity.Picuser">
+    <!--@mbg.generated-->
+    <!--@Table picuser-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="time" jdbcType="TIME" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `uid`, `time`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from picuser
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from picuser
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.yang719.SpringWeb.entity.Picuser" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into picuser (`uid`, `time`)
+    values (#{uid,jdbcType=INTEGER}, #{time,jdbcType=TIME})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.yang719.SpringWeb.entity.Picuser" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into picuser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIME},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yang719.SpringWeb.entity.Picuser">
+    <!--@mbg.generated-->
+    update picuser
+    <set>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=TIME},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yang719.SpringWeb.entity.Picuser">
+    <!--@mbg.generated-->
+    update picuser
+    set `uid` = #{uid,jdbcType=INTEGER},
+      `time` = #{time,jdbcType=TIME}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByUid" resultMap="BaseResultMap">
+    select * from picuser where uid = #{uid,jdbcType=INTEGER}
+  </select>
+</mapper>

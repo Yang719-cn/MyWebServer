@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yang719.SpringWeb.mapper.RegemailMapper">
+  <resultMap id="BaseResultMap" type="cn.yang719.SpringWeb.entity.Regemail">
+    <!--@mbg.generated-->
+    <!--@Table regemail-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, email, `time`, code, ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from regemail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from regemail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.yang719.SpringWeb.entity.Regemail" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into regemail (email, `time`, code, 
+      ip)
+    values (#{email,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.yang719.SpringWeb.entity.Regemail" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into regemail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="email != null">
+        email,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yang719.SpringWeb.entity.Regemail">
+    <!--@mbg.generated-->
+    update regemail
+    <set>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yang719.SpringWeb.entity.Regemail">
+    <!--@mbg.generated-->
+    update regemail
+    set email = #{email,jdbcType=VARCHAR},
+      `time` = #{time,jdbcType=TIMESTAMP},
+      code = #{code,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectLatestByEmail" resultMap="BaseResultMap">
+    select *
+        from regemail
+        where id = (
+                    select max(id)
+                        from regemail
+                        where email = #{email,jdbcType=VARCHAR}
+                    )
+  </select>
+</mapper>
