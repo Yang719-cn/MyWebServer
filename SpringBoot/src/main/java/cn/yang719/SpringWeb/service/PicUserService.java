@@ -5,4 +5,6 @@ import cn.yang719.SpringWeb.entity.User;
 
 public interface PicUserService {
     public Result ifPicUser(User user);
+
+    public Result addPicUser(User user);
 }

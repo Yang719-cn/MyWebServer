@@ -10,17 +10,13 @@ import cn.yang719.SpringWeb.service.*;
 import cn.yang719.SpringWeb.utils.file.image.ImageGet;
 import cn.yang719.SpringWeb.utils.file.image.ImageSave;
 import cn.yang719.utils.Log;
-import cn.yang719.utils.OSTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -158,8 +154,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/imgBase64")
-    public String base64(String imgUrl) throws IOException {
-        System.out.println(imgUrl);
+    public String imgBase64(String imgUrl) throws IOException {
+        Log.i("UserController","请求转换为base64编码的图片地址为："+imgUrl);
         return ImageGet.getBase64(imgUrl);
     }
 

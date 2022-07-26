@@ -48,9 +48,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result login(User user) {
+        Result res = Result.fail().msg("未输入正确用户登录信息");
+        //判断是否输入密码
+        if (user.getPassword() == null)
+            return res;
+        //判断是通过邮箱登录还是用户名登录
+        if (user.getEmail() != null)
+            res = loginByEmail(user.getEmail(),user.getPassword());
+        if (user.getName() != null)
+            res = Result.fail().msg("用户名登录还未完善，用邮箱注册吧");
+        return res;
+    }
+
+    private Result loginByEmail(String email,String pwd){
         //根据email获取的用户信息对象
-        User user1 = userMapper.selectByEmail(user.getEmail());
-        Log.i("UserServiceImpl",user.toString());
+        User user1 = userMapper.selectByEmail(email);
+        Log.i("UserServiceImpl","输入的邮箱为:"+email);
         //判断是否有此账户
         if (user1 == null)
             return Result.fail().msg("账号不存在").code(-1);
@@ -63,7 +76,7 @@ public class UserServiceImpl implements UserService {
         //获取user1的盐值
         String salt = user1.getSalt();
         //根据输入的密码和user1的盐合二为一加密为MD5
-        String md5pwd = PasswordToMD5.pwdSalt2MD5(user.getPassword(),salt);
+        String md5pwd = PasswordToMD5.pwdSalt2MD5(pwd,salt);
         //判断用户输入的密码是否正确
         if (Objects.equals(user1.getPassword(),md5pwd))
             return Result.ok().code(1).msg("登录成功").data(user1);

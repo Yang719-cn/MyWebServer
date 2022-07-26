@@ -25,4 +25,18 @@ public class PicUserServiceImpl implements PicUserService {
             return Result.ok().data(true);
         return Result.fail().data(false);
     }
+
+    @Override
+    public Result addPicUser(User user) {
+        if (!Objects.nonNull(user))
+            return Result.fail().msg("输入为空");
+        Picuser picuser = new Picuser();
+        picuser.setUid(user.getId());
+        int code = mapper.insert(picuser);
+        if (code < 1)
+            return Result.fail();
+        return Result.ok();
+    }
+
+
 }

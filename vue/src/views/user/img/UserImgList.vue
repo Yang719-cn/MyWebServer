@@ -25,7 +25,7 @@
           label="图片"
           width="180">
           <template slot-scope="scope">
-            <el-image :src="getImgUrl(scope.row.picture.picurl)">
+            <el-image :src="getImgBase64(scope.row.picture.picurl)">
               <div slot="error" style="font-size: 50px">
                 <i class="el-icon-loading"></i>
               </div>
@@ -100,10 +100,6 @@ export default {
     this.loadList();
   },
   methods: {
-    //通过地址获取base64码
-    getImgBase64(){
-
-    },
     //获取图片相对
     getImg(path){
       let iii = path.split("/");
@@ -116,6 +112,17 @@ export default {
     //获取图片名字
     getImgName(path){
       return  this.getImg(path).split("$")[1]
+    },
+    //获取图片的base64
+    getImgBase64(path){
+      let that = this;
+      let url = "http://yang719.cn:8086/user/imgBase64?imgUrl=" + path;
+      let base64 = null;
+      axios.get(url).then(resp =>{
+        base64 = resp;
+        console.log(base64);
+      })
+      console.log(base64)
     },
     //栏删除函数部位
     deleteRow(index, rows) {
