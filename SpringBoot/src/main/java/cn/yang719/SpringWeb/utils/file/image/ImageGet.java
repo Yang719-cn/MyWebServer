@@ -7,6 +7,7 @@ import java.io.*;
 
 public class ImageGet {
 
+    //java读取本地文件再将其转换为base64发到前端
     public static String getBase64(String url) throws IOException {
         return Base64Tool.imgToBase64(url);
     }
