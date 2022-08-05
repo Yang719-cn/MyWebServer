@@ -11,4 +11,8 @@ public class ImageGet {
     public static String getBase64(String url) throws IOException {
         return Base64Tool.imgToBase64(url);
     }
+
+    public static void imgDownload(){
+
+    }
 }

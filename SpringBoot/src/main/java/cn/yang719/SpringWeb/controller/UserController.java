@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -205,6 +206,11 @@ public class UserController {
             return Result.ok().msg("上传图片所有步骤已完成");
         else
             return Result.fail().msg("上传信息保存失败");
+    }
+
+    @PostMapping(value = "/imgDownload")
+    public void imgDownload(HttpServletResponse response)throws IOException{
+
     }
 
     @PostMapping(value = "/deleteImg")
