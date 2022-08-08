@@ -2,7 +2,7 @@
   <div id="main">
     <div class="top-breadcrumb">
       <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '#/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item><a href="/YangCraft">YangCraft</a></el-breadcrumb-item>
         <el-breadcrumb-item><a href="/YangCraft/user/backend">用户后台</a></el-breadcrumb-item>
         <el-breadcrumb-item>用户图片</el-breadcrumb-item>
@@ -11,6 +11,7 @@
     </div>
     <el-card shadow="hover" v-show="tableData.length<1" style="margin: 16px;padding: 10px">
       <p>看来你还没有添加过图片了，添加一点图片吧</p>
+      <p>也有可能是图片列表加载过慢，别急等一下吧</p>
     </el-card>
     <el-card class="img-list" shadow="hover" v-show="tableData.length > 0">
       <el-table
@@ -25,7 +26,7 @@
           label="图片"
           width="180">
           <template slot-scope="scope">
-            <el-image :src="getImgBase64(scope.row.picture.picurl)">
+            <el-image :src="scope.row.base64">
               <div slot="error" style="font-size: 50px">
                 <i class="el-icon-loading"></i>
               </div>
@@ -44,24 +45,24 @@
           label="图片名称"
           width="140">
           <template slot-scope="scope">
-            <p>{{getImgName(scope.row.picture.picurl)}}</p>
+            <p>{{getImgName(scope.row.picurl)}}</p>
           </template>
         </el-table-column>
         <el-table-column
           sortable
-          prop="picture.picheight"
+          prop="picheight"
           label="图高"
           width="80">
         </el-table-column>
         <el-table-column
           sortable
-          prop="picture.picwidth"
+          prop="picwidth"
           label="图宽"
           width="80">
         </el-table-column>
         <el-table-column
           sortable
-          prop="picture.filesize"
+          prop="filesize"
           label="文件大小"
           width="100">
         </el-table-column>
@@ -97,17 +98,9 @@ import router from "../../../router";
 export default {
   name: "UserImgList",
   mounted:function () {
-    this.loadList();
-    this.changeImgUrlToBase64();
+    this.loadListPlus();
   },
   methods: {
-    //
-    changeImgUrlToBase64(){
-      let size = this.tableData.length;
-      for (let i = 0;i<size;i++)
-        this.tableData[i].picture.url = this.getImgBase64(this.tableData[i].picture.url);
-      console.log("我变");
-    },
     //获取图片相对
     getImg(path){
       let iii = path.split("/");
@@ -131,6 +124,7 @@ export default {
         console.log(base64);
       })
       console.log(base64)
+      return base64;
     },
     //栏删除函数部位
     deleteRow(index, rows) {
@@ -148,20 +142,9 @@ export default {
       return dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds()
     },
     //获取表信息
-    loadList() {
-      var _this = this
-      axios.get('http://yang719.cn:8086/user/imgList?id='+JSON.parse(sessionStorage.getItem('userInfo')).id).then(resp => {
-        if (resp.data.code > 0) {
-          console.log('阿这')
-          _this.tableData = resp.data.data
-          console.log(_this.tableData)
-        }
-      })
-    },
-    //
     loadListPlus(){
       var _this = this
-      axios.get('http://yang719.cn:8086/user/imgBase64?id='+JSON.parse(sessionStorage.getItem('userInfo')).id).then(resp => {
+      axios.get('http://yang719.cn:8086/user/imgListPlus?id='+JSON.parse(sessionStorage.getItem('userInfo')).id).then(resp => {
         if (resp.data.code > 0) {
           console.log('阿这')
           _this.tableData = resp.data.data
