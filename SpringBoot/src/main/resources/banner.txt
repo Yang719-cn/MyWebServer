@@ -42,6 +42,6 @@ ${AnsiColor.BRIGHT_RED}
 Application Version: ${application.version}${application.formatted-version}
 Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
 ${AnsiBackground.BRIGHT_CYAN}
-此版本打包于2022.8
+此版本打包于2022.8.8
 ${AnsiBackground.BRIGHT_WHITE}
 

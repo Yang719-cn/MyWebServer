@@ -13,6 +13,7 @@ import cityPlanning from "../views/user/report/suggest/CityPlanning";
 import register from "../components/Register";
 import loginOrRegister from "../components/LoginOrRegister"
 import webPage from "../views/user/WebPage"
+import userSetting from "../views/user/UserSetting"
 
 Vue.use(Router)
 
@@ -65,6 +66,11 @@ export default new Router({
           path: '',
           name: '',
           component: userBackendHome
+        },
+        {
+          path: 'userSetting',
+          name: 'userSetting',
+          component: userSetting
         },
         {
           path: 'userImgAdd',

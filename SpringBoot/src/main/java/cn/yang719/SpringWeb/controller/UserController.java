@@ -2,10 +2,7 @@ package cn.yang719.SpringWeb.controller;
 
 import cn.yang719.SpringWeb.dto.Result;
 import cn.yang719.SpringWeb.email.SendEmail;
-import cn.yang719.SpringWeb.entity.Picture;
-import cn.yang719.SpringWeb.entity.Regemail;
-import cn.yang719.SpringWeb.entity.User;
-import cn.yang719.SpringWeb.entity.Useruploadpic;
+import cn.yang719.SpringWeb.entity.*;
 import cn.yang719.SpringWeb.service.*;
 import cn.yang719.SpringWeb.utils.file.image.ImageGet;
 import cn.yang719.SpringWeb.utils.file.image.ImageSave;
@@ -18,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @CrossOrigin //允许跨源访问
@@ -158,6 +157,23 @@ public class UserController {
     public String imgBase64(String imgUrl) throws IOException {
         Log.i("UserController","请求转换为base64编码的图片地址为："+imgUrl);
         return ImageGet.getBase64(imgUrl);
+    }
+
+    @RequestMapping(value = "/imgListPlus")
+    public Result imgListPlus(User user) throws IOException {
+        Log.i("UserController","调取imgList");
+        Log.i("UserController",user.toString());
+        List<Useruploadpic> picList = (List<Useruploadpic>) uploadPicService.selectUploadedInfoByUserId(user).getData();
+        List<ImagePlus> imgList = new ArrayList<ImagePlus>();
+        for (Useruploadpic pic:picList){
+            ImagePlus img = new ImagePlus(pic.getPicture());
+            img.setTime(pic.getTime());
+            img.setBase64(ImageGet.getBase64(img.getPicurl()));
+            imgList.add(img);
+        }
+        Result result = Result.ok().data(imgList);
+        Log.i("UserController",result.toString());
+        return result;
     }
 
     @PostMapping(value = "/addImg")

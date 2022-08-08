@@ -17,7 +17,7 @@
           </span>
         </div>
       </div>
-      <el-menu-item index="0">
+      <el-menu-item index="/YangCraft/user/backend/userSetting">
         <i class="el-icon-">
           <el-image src="user.imgUrl" height="24" width="24">
             <div slot="error" class="image-slot">
