@@ -98,8 +98,16 @@ export default {
   name: "UserImgList",
   mounted:function () {
     this.loadList();
+    this.changeImgUrlToBase64();
   },
   methods: {
+    //
+    changeImgUrlToBase64(){
+      let size = this.tableData.length;
+      for (let i = 0;i<size;i++)
+        this.tableData[i].picture.url = this.getImgBase64(this.tableData[i].picture.url);
+      console.log("我变");
+    },
     //获取图片相对
     getImg(path){
       let iii = path.split("/");
@@ -143,6 +151,17 @@ export default {
     loadList() {
       var _this = this
       axios.get('http://yang719.cn:8086/user/imgList?id='+JSON.parse(sessionStorage.getItem('userInfo')).id).then(resp => {
+        if (resp.data.code > 0) {
+          console.log('阿这')
+          _this.tableData = resp.data.data
+          console.log(_this.tableData)
+        }
+      })
+    },
+    //
+    loadListPlus(){
+      var _this = this
+      axios.get('http://yang719.cn:8086/user/imgBase64?id='+JSON.parse(sessionStorage.getItem('userInfo')).id).then(resp => {
         if (resp.data.code > 0) {
           console.log('阿这')
           _this.tableData = resp.data.data
