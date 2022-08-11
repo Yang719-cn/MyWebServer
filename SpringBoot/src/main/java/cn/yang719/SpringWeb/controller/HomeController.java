@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
 
     @RequestMapping(value = "")
-    public String home(){
-        return "ok";
+    public Result home(){
+        return testLink();
     }
 
     @RequestMapping(value = "/testLink")
     public Result testLink(){
         Log.s("HomeController","请求是否能够连接到后端");
         return Result.ok().msg("后端链接成功");
+
     }
 }
