@@ -13,7 +13,7 @@ public class R<T> {
     /**
      *状态码
      */
-    private int code;
+    private Integer code;
 
     /**
      * 返回文本消息
@@ -23,7 +23,7 @@ public class R<T> {
     /**
      * 返回是否执行成功
      */
-    private  boolean success;
+    private Boolean success;
 
     /**
      *
@@ -32,7 +32,7 @@ public class R<T> {
 
     private Result result;
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
@@ -40,7 +40,7 @@ public class R<T> {
         return msg;
     }
 
-    public boolean isSuccess() {
+    public Boolean isSuccess() {
         return success;
     }
 
@@ -52,10 +52,18 @@ public class R<T> {
         this.data = data;
     }
 
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
     /**
      * 构造器私有化，防止外界任意创建对象
      */
     private R(){}
+    private <T> R<T> R(T data,Boolean success,String msg,Integer code){
+        R<T> r = new R<>();
+        return r;
+    }
 
     public R success(boolean success){
         this.success = success;
