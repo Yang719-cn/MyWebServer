@@ -1,6 +1,13 @@
 package cn.yang719.SpringWeb.dto;
 
 
+/**
+ * 统一DTO处理 <br/>
+ * 接触了RuoYi框架以及看了螃蟹哥发现老的Result不完善从而搞得实验性DTO <br/>
+ * @author Yang
+ * @version 0.1 小试牛刀
+ * @param <T> 规定数据类
+ */
 public class R<T> {
 
     /**
