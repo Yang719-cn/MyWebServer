@@ -37,4 +37,11 @@ public class ResultTool {
 
         return re;
     }
+
+    public static Result R2Result(R r){
+        if (r.isSuccess())
+            return Result.ok().code(r.getCode()).msg(r.getMsg()).data(r.getData());
+        else
+            return Result.fail().code(r.getCode()).msg(r.getMsg()).data(r.getData());
+    }
 }

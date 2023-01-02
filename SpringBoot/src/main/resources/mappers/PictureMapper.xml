@@ -105,4 +105,8 @@
     select * from picture where picUrl = #{url,jdbcType=VARCHAR}
   </select>
 
+  <select id="selectPageByUserId" resultMap="BaseResultMap">
+    select * from picture where id in (select pid from useruploadpic where uid = #{id}) limit #{start},#{size}
+  </select>
+
 </mapper>

@@ -19,6 +19,5 @@ public class HomeController {
     public Result testLink(){
         Log.s("HomeController","请求是否能够连接到后端");
         return Result.ok().msg("后端链接成功");
-
     }
 }

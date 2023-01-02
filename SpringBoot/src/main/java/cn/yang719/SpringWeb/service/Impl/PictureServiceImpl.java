@@ -25,6 +25,15 @@ public class PictureServiceImpl implements PictureService {
         return Result.ok().data(list);
     }
 
+
+    @Override
+    public Result pageList(User user,int pageNum,int pageSize) {
+        if (pageNum < 1 || pageSize < 1 )
+            return Result.fail().msg("获取页面信息输入出错");
+        List<Picture> list = mapper.selectPageByUserId(user.getId(),(pageNum - 1) * pageSize,pageSize);
+        return Result.ok().data(list);
+    }
+
     @Override
     public Result add(Picture picture) {
         //判断输入是否为空

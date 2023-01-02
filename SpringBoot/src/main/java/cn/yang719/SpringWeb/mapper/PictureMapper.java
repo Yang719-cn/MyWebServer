@@ -22,4 +22,6 @@ public interface PictureMapper {
     List<Picture> selectByUserId(Integer id);
 
     Picture selectByPicUrl(String url);
+
+    List<Picture> selectPageByUserId(Integer id,Integer start,Integer size);
 }
