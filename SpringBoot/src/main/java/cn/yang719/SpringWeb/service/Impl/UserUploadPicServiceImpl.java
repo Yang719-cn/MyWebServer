@@ -8,6 +8,7 @@ import cn.yang719.SpringWeb.service.UserUploadPicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -47,5 +48,20 @@ public class UserUploadPicServiceImpl implements UserUploadPicService {
         if (code > 0)
             return Result.ok();
         return Result.fail();
+    }
+
+    @Override
+    public Result canUserUpload(User user) {
+
+        if (user == null)
+            return Result.fail().msg("输入用户数据为空").code(-1);
+        if (user.getId() < 1)
+            return Result.fail().msg("输入用户id有误").code(0);
+
+        Useruploadpic record = new Useruploadpic();
+        record.setUid(user.getId());
+        record.setTime(new Date());
+
+        return null;
     }
 }

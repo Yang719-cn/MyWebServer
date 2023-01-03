@@ -11,4 +11,7 @@ public interface UserUploadPicService {
     Result selectUploadedInfoByUserId(User user);
 
     Result addLog(Useruploadpic log);
+
+    //判断用户是否到达上传图片的上线
+    Result canUserUpload(User user);
 }

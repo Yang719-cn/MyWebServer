@@ -13,6 +13,8 @@ public interface UseruploadpicMapper {
 
     int insertSelective(Useruploadpic record);
 
+    List<Useruploadpic> select(Useruploadpic record);
+
     Useruploadpic selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(Useruploadpic record);

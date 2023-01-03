@@ -38,6 +38,30 @@
     values (#{uid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}
       )
   </insert>
+  <select id="select" resultMap="BaseResultMap">
+    select
+        *
+    from
+        useruploadpic
+    where
+        <set>
+            <if test="id != null">
+                id = #{id,javaType=INTEGER},
+            </if>
+            <if test="uid != null">
+                uid = #{uid,javaType=INTEGER},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,javaType=INTEGER},
+            </if>
+            <if test="time != null">
+                time = #{time,javaType=TIMESTAMP},
+            </if>
+            <if test="picture != null">
+                picture = #{picture,},
+            </if>
+        </set>
+  </select>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.yang719.SpringWeb.entity.Useruploadpic" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into useruploadpic
