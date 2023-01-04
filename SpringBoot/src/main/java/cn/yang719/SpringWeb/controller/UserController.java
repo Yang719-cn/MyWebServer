@@ -194,6 +194,10 @@ public class UserController {
         if (user1 == null)
             return Result.fail().code(-1).msg("未获取用户数据");
 
+        //判断用户每天上传的图片是否到达上限
+        if (!uploadPicService.canUserUpload(user1).isSuccess())
+            return Result.fail().code(0).msg("每天上传的图片已到达上限");
+
         Result addPicRes = ImageSave.saveAndInsertSQL(file,
                 user1.getName(),
                 "C:/mc/plugins/Images/",

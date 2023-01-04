@@ -5,6 +5,7 @@ import cn.yang719.SpringWeb.entity.User;
 import cn.yang719.SpringWeb.entity.Useruploadpic;
 import cn.yang719.SpringWeb.mapper.UseruploadpicMapper;
 import cn.yang719.SpringWeb.service.UserUploadPicService;
+import cn.yang719.utils.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +63,17 @@ public class UserUploadPicServiceImpl implements UserUploadPicService {
         record.setUid(user.getId());
         record.setTime(new Date());
 
-        return null;
+        try {
+            //每天上限后要改为可在配置文件中修改
+            if (mapper.select(record).size() <= 5)
+                return Result.ok().msg("未达到每天上传上限");
+            else
+                return Result.fail().msg("已到达每天上传上限");
+        }catch (Exception e){
+            Log.e("UserUploadPicServiceImpl","canUserUpload()出现未知错误");
+            e.printStackTrace();
+        }
+
+        return Result.fail().msg("未知错误").code(-1);
     }
 }
