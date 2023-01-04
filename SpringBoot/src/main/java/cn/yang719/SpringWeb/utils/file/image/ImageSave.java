@@ -2,10 +2,9 @@ package cn.yang719.SpringWeb.utils.file.image;
 
 import cn.yang719.SpringWeb.dto.Result;
 import cn.yang719.SpringWeb.entity.Picture;
-import cn.yang719.SpringWeb.service.PicUserService;
 import cn.yang719.SpringWeb.service.PictureService;
 import cn.yang719.utils.Log;
-import cn.yang719.utils.OSTool;
+import cn.yang719.utils.OS.OSTool;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
