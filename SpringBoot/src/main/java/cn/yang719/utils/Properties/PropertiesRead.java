@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Properties;
 
 public class PropertiesRead {
 
@@ -15,25 +16,30 @@ public class PropertiesRead {
      * 通过自定义读取路径和要读取的项目获取目标数据
      * @param path 配置文件的路径
      * @param key 所要搜寻的键值
-     * @return value
+     * @return value 获取到的值
      */
     public static String getData(String path,String key){
-        Resource resource = new ClassPathResource("resource.properties");
+        Resource resource = new ClassPathResource(path);
         String value = "未获取到value";
 
         try {
+            //获取文件
             InputStream is = resource.getInputStream();
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader br = new BufferedReader(isr);
 
+            //开始读取
+            Properties properties = new Properties();
+            properties.load(br);
+            value = properties.getProperty(key);
+
+            //流关闭
             br.close();
             isr.close();
             is.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
 
         return value;
     }
