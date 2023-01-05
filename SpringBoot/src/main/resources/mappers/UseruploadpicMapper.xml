@@ -55,7 +55,7 @@
                 pid = #{pid,javaType=INTEGER},
             </if>
             <if test="time != null">
-                time = #{time,javaType=TIMESTAMP},
+                TO_DAYS(time) = TO_DAYS(#{time,javaType=TIMESTAMP}),
             </if>
             <if test="picture != null">
                 picture = #{picture,},
