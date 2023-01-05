@@ -18,7 +18,7 @@ public class PropertiesRead {
      * @param key 所要搜寻的键值
      * @return value 获取到的值
      */
-    public static String getData(String path,String key){
+    public static String getValue(String path,String key){
         Resource resource = new ClassPathResource(path);
         String value = "未获取到value";
 
