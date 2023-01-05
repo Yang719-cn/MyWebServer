@@ -38,6 +38,11 @@ public class UserController {
     @Autowired
     private HttpSession session;
 
+    @RequestMapping(value = "/test")
+    public Result test(User user){
+        return uploadPicService.canUserUpload(user);
+    }
+
     @RequestMapping(value = "/ifPicUser")
     public Result ifPicUser(User user){
         Log.i("UserController","进入ifPicUser");
@@ -156,7 +161,7 @@ public class UserController {
     @RequestMapping(value = "/imgBase64")
     public String imgBase64(String imgUrl) throws IOException {
         Log.i("UserController","请求转换为base64编码的图片地址为："+imgUrl);
-        return ImageGet.getBase64(imgUrl);
+        return (String) ImageGet.getBase64(imgUrl).getData();
     }
 
     @RequestMapping(value = "/imgListPlus")
@@ -168,7 +173,7 @@ public class UserController {
         for (Useruploadpic pic:picList){
             ImagePlus img = new ImagePlus(pic.getPicture());
             img.setTime(pic.getTime());
-            img.setBase64(ImageGet.getBase64(img.getPicurl()));
+            img.setBase64((String) ImageGet.getBase64(img.getPicurl()).getData());
             imgList.add(img);
         }
         Result result = Result.ok().data(imgList);
