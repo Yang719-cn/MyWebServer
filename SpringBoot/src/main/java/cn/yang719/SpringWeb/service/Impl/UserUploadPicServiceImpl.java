@@ -53,6 +53,7 @@ public class UserUploadPicServiceImpl implements UserUploadPicService {
 
     @Override
     public Result canUserUpload(User user) {
+        Log.c("UserUploadPicServiceImpl","canUserUpload");
 
         if (user == null)
             return Result.fail().msg("输入用户数据为空").code(-1);
