@@ -68,7 +68,7 @@ public class UserUploadPicServiceImpl implements UserUploadPicService {
 
         try {
             //每天上限后要改为可在配置文件中修改
-            if (mapper.select(record).size() <= 5)
+            if (mapper.select(record).size() < 3)
                 return Result.ok().msg("未达到每天上传上限");
             else
                 return Result.fail().msg("已到达每天上传上限");
