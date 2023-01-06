@@ -43,24 +43,21 @@
         *
     from
         useruploadpic
-    where
-        <set>
+
+        <trim prefix="where" prefixOverrides="and">
             <if test="id != null">
-                id = #{id,javaType=INTEGER},
+                and id = #{id,jdbcType=INTEGER}
             </if>
             <if test="uid != null">
-                uid = #{uid,javaType=INTEGER},
+                and uid = #{uid,jdbcType=INTEGER}
             </if>
             <if test="pid != null">
-                pid = #{pid,javaType=INTEGER},
+                and pid = #{pid,jdbcType=INTEGER}
             </if>
             <if test="time != null">
-                TO_DAYS(time) = TO_DAYS(#{time,javaType=TIMESTAMP}),
+                and TO_DAYS(time) = TO_DAYS(#{time,jdbcType=TIMESTAMP})
             </if>
-            <if test="picture != null">
-                picture = #{picture,},
-            </if>
-        </set>
+        </trim>
   </select>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.yang719.SpringWeb.entity.Useruploadpic" useGeneratedKeys="true">
     <!--@mbg.generated-->

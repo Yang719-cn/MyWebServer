@@ -64,6 +64,8 @@ public class UserUploadPicServiceImpl implements UserUploadPicService {
         record.setUid(user.getId());
         record.setTime(new Date());
 
+        Log.i("UserUploadPicServiceImpl.canUserUpload",record.toString());
+
         try {
             //每天上限后要改为可在配置文件中修改
             if (mapper.select(record).size() <= 5)

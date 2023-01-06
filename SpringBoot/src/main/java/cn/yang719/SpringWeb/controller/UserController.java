@@ -39,7 +39,9 @@ public class UserController {
     private HttpSession session;
 
     @RequestMapping(value = "/test")
-    public Result test(User user){
+    public Result test(int id){
+        User user = new User();
+        user.setId(id);
         return uploadPicService.canUserUpload(user);
     }
 
