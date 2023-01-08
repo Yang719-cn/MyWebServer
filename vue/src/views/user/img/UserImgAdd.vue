@@ -162,6 +162,7 @@ export default {
           }else {
             console.log('图片传送成功了，但保存失败了');
             console.log(resp.data);
+            if(resp.data.msg)
             this.$alert('图片传送成功了，但保存失败了', '注意', {
               confirmButtonText: '确定',
               callback: action => {

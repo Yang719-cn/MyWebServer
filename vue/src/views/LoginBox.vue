@@ -67,7 +67,7 @@ export default {
             console.log(postDate);
 
             //判断完毕开始输送post
-            axios.post("http://yang719.cn:8086/user/login", postDate).then(function (resp){
+            axios.post("http://yang719.cn/user/login", postDate).then(function (resp){
               console.log(resp.data);
               if (resp.data.code>0){
                 console.log("登录成功");

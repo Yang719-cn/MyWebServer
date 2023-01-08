@@ -40,6 +40,9 @@ public class AdminController {
 
     @RequestMapping(value = "/setImgUser")
     public Result setImgUser(User user){
+
+        Log.c("AdminController","setImgUser");
+
         return Result.fail();
     }
 }
