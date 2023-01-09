@@ -1,4 +1,4 @@
-package cn.yang719.utils.image;
+package cn.yang719.utils.Image;
 
 public class ImgsBase64 {
     /**
