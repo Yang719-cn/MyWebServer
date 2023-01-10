@@ -5,6 +5,7 @@ import cn.yang719.SpringWeb.entity.User;
 import cn.yang719.SpringWeb.entity.Useruploadpic;
 import cn.yang719.SpringWeb.mapper.UseruploadpicMapper;
 import cn.yang719.SpringWeb.service.UserUploadPicService;
+import cn.yang719.SpringWeb.utils.properties.PropertiesRead;
 import cn.yang719.utils.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,7 +69,10 @@ public class UserUploadPicServiceImpl implements UserUploadPicService {
 
         try {
             //每天上限后要改为可在配置文件中修改
-            if (mapper.select(record).size() < 3)
+            //先从配置文件中获取最大上传数量
+            int maxUpdate = Integer.valueOf(PropertiesRead.getValue("properties/img.properties","MaxUpDate"));
+            Log.i("PropertiesRead","每天上传数量为:"+maxUpdate);
+            if (mapper.select(record).size() < maxUpdate)
                 return Result.ok().msg("未达到每天上传上限");
             else
                 return Result.fail().msg("已到达每天上传上限");

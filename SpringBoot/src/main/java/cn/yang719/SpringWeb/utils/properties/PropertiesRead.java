@@ -1,4 +1,4 @@
-package cn.yang719.utils.Properties;
+package cn.yang719.SpringWeb.utils.properties;
 
 
 import org.springframework.core.io.ClassPathResource;
@@ -13,8 +13,8 @@ import java.util.Properties;
 public class PropertiesRead {
 
     /**
-     * 通过自定义读取路径和要读取的项目获取目标数据
-     * @param path 配置文件的路径
+     * 通过读取resource下自定义路径和要读取的项目获取目标数据
+     * @param path 配置文件的路径（相对于项目文件resource下的路径）
      * @param key 所要搜寻的键值
      * @return value 获取到的值
      */
